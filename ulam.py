@@ -6,7 +6,7 @@
 # http://stackoverflow.com/questions/398299/looping-in-a-spiral
 
 # First parameter gives output file name, default: ulam.png
-# Second parameter gives external side of the spiral, default: 100
+# Second parameter gives external side of the spiral in pixels, default: 100
 
 import sys
 from PIL import Image
@@ -28,7 +28,7 @@ def spiral(X, Y, img):
 
             ### prime test part ###
             # In fact, we test if n is NOT a prime, cause it's faster by shortcut
-            # TODO : fill image with white for even numbers with a fast method
+            # TODO : fill image with white pixels for even numbers,
             #        so we can iterate only over odds
             n += 1
             cx = (X/2)-x
