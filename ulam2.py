@@ -15,6 +15,20 @@ import math
 WHITE = (0xff, 0xff, 0xff, 0xff)
 BLACK = (0x00, 0x00, 0x00, 0xff)
 
+def prime(a):
+    if a < 2: return False
+    if a == 2 or a == 3: return True # manually test 2 and 3   
+    if a % 2 == 0 or a % 3 == 0: return False # exclude multiples of 2 and 3
+ 
+    maxDivisor = a**0.5
+    d, i = 5, 2
+    while d <= maxDivisor:
+        if a % d == 0: return False
+        d += i 
+        i = 6 - i # this modifies 2 into 4 and viceversa
+ 
+    return True
+
 def spiral(X, Y, img):
     nb_num = X*Y
     nb_tenth = nb_num / 10
@@ -25,30 +39,17 @@ def spiral(X, Y, img):
     ok = 0
     for i in range(max(X, Y)**2):
         if (-X/2 < x <= X/2) and (-Y/2 < y <= Y/2):
-
-            ### prime test part ###
-            # In fact, we test if n is NOT a prime, cause it's faster by shortcut
-            # TODO : fill image with white pixels for even numbers,
-            #        so we can iterate only over odds
             n += 1
             cx = (X/2)-x
             cy = (Y/2)-y
-#            if n % nb_tenth == 0:
-#                print (n/nb_tenth)*10, '%'
-            if n % 2 != 0:
-                # If n is odd, we test divisibility by odds,
-                # between 3 and square root of n
-                for i in range(3, int(math.sqrt(n))+1, 2):
-                    if n % i == 0:
-                        img.putpixel((cy,cx), tuple(WHITE))
-                        break
-            else:
-                img.putpixel((cy,cx), tuple(WHITE))
-            ### 
+            if prime(n) == False:
+                img.putpixel((cy,cx), tuple(WHITE)) 
 
         if x == y or (x < 0 and x == -y) or (x > 0 and x == 1-y):
             dx, dy = -dy, dx
         x, y = x+dx, y+dy
+
+
 
 if __name__ == '__main__':
     filename = sys.argv[1]    if len(sys.argv) > 1 else 'ulam.png'

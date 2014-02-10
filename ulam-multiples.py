@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 # coding: utf-8
-# draw an ulam spiral
+# draw n spirals, each representing multiples of n
 # Author : Martin Piffault
 # Spiral path algorithm from :
 # http://stackoverflow.com/questions/398299/looping-in-a-spiral
