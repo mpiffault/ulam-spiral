@@ -1,12 +1,13 @@
 #!/usr/bin/env python2.7
 # coding: utf-8
-# draw n spirals, each representing multiples of n
+# draw n spirals, each representing multiples of n (white on black)
 # Author : Martin Piffault
 # Spiral path algorithm from :
 # http://stackoverflow.com/questions/398299/looping-in-a-spiral
 
-# First parameter gives output file name, default: ulam.png
+# First parameter gives output prefix name, default 'mult'
 # Second parameter gives external side of the spiral in pixels, default: 100
+# Third parameter n gives number of iterations from 1
 
 import sys
 from PIL import Image
@@ -28,11 +29,6 @@ def spiral(X, Y, img, mult):
             n += 1
             cx = (X/2)-x
             cy = (Y/2)-y
-            if n % nb_tenth == 0:
-                print (n/nb_tenth)*10, '%'
-
-
-            
             n % mult == 0 and img.putpixel((cy,cx), tuple(WHITE))
 
         if x == y or (x < 0 and x == -y) or (x > 0 and x == 1-y):
@@ -45,12 +41,15 @@ if __name__ == '__main__':
     nb_mult = int(sys.argv[3]) if len(sys.argv) > 3 else 10
     dimension = (width,height)
 
-    for i in range(1, nb_mult):
-        filenamef = filename + str(i) + ".png"
+    num_len = len(str(nb_mult))
+
+    for i in range(1, nb_mult + 1):
+        filenamef = filename + str(i).zfill(num_len) + ".png"
 
     # We start with a black image
         img = Image.new('RGBA',dimension,color=(BLACK))
 
+        print i,"..."
         spiral(width, height, img, i)
-
+        print "done."
         img.save(filenamef)
