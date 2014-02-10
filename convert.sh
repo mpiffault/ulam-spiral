@@ -1,0 +1,1 @@
+convert -enhance -delay 5 -loop 0 *.png youpla.gif
