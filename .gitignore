@@ -1,5 +1,6 @@
 *.gif
 *.png
+images/
 *.py[cod]
 
 # C extensions
