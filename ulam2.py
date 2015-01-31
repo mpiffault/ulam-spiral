@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python
 # coding: utf-8
 # draw an ulam spiral
 # Author : Martin Piffault
@@ -31,17 +31,17 @@ def prime(a):
 
 def spiral(X, Y, img):
     nb_num = X*Y
-    nb_tenth = nb_num / 10
+    nb_tenth = nb_num // 10
     x = y = 0
     dx = 0
     dy = -1
     n = 0
     ok = 0
     for i in range(max(X, Y)**2):
-        if (-X/2 < x <= X/2) and (-Y/2 < y <= Y/2):
+        if (-X//2 < x <= X//2) and (-Y//2 < y <= Y//2):
             n += 1
-            cx = (X/2)-x
-            cy = (Y/2)-y
+            cx = (X//2)-x
+            cy = (Y//2)-y
             if prime(n) == False:
                 img.putpixel((cy,cx), tuple(WHITE)) 
 
@@ -54,6 +54,7 @@ def spiral(X, Y, img):
 if __name__ == '__main__':
     filename = sys.argv[1]    if len(sys.argv) > 1 else 'ulam.png'
     width = height = int(sys.argv[2])  if len(sys.argv) > 2 else 100
+    height = int(sys.argv[3]) if len(sys.argv) > 3 else width
     dimension = (width,height)
     
     filename = '.'.join([filename,'png']) if '.' not in filename else filename
